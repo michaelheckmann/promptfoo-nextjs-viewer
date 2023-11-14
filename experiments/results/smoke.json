@@ -1,0 +1,392 @@
+{
+  "results": {
+    "version": 2,
+    "results": [
+      {
+        "provider": {
+          "id": "openai:gpt-3.5-turbo"
+        },
+        "prompt": {
+          "raw": "Say Any sufficiently advanced technology is indistinguishable from magic. in German",
+          "display": "Say {{ var1 }} in German"
+        },
+        "vars": {
+          "var1": "Any sufficiently advanced technology is indistinguishable from magic.",
+          "_conversation": []
+        },
+        "response": {
+          "output": "Jede hinreichend fortgeschrittene Technologie ist von Magie nicht zu unterscheiden.",
+          "tokenUsage": {
+            "total": 41,
+            "prompt": 21,
+            "completion": 20
+          },
+          "cached": false
+        },
+        "success": true,
+        "score": 1,
+        "latencyMs": 960,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "No assertions",
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0
+          },
+          "assertion": null
+        }
+      },
+      {
+        "provider": {
+          "id": "openai:gpt-3.5-turbo"
+        },
+        "prompt": {
+          "raw": "Translate Any sufficiently advanced technology is indistinguishable from magic. to German",
+          "display": "Translate {{ var1 }} to German"
+        },
+        "vars": {
+          "var1": "Any sufficiently advanced technology is indistinguishable from magic.",
+          "_conversation": []
+        },
+        "response": {
+          "output": "Jede ausreichend fortgeschrittene Technologie ist von Magie nicht zu unterscheiden.",
+          "tokenUsage": {
+            "total": 41,
+            "prompt": 21,
+            "completion": 20
+          },
+          "cached": false
+        },
+        "success": true,
+        "score": 1,
+        "latencyMs": 1054,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "No assertions",
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0
+          },
+          "assertion": null
+        }
+      },
+      {
+        "provider": {
+          "id": "openai:gpt-3.5-turbo"
+        },
+        "prompt": {
+          "raw": "Translate Machine intelligence is the last invention that humanity will ever need to make to German",
+          "display": "Translate {{ var1 }} to German"
+        },
+        "vars": {
+          "var1": "Machine intelligence is the last invention that humanity will ever need to make",
+          "_conversation": []
+        },
+        "response": {
+          "output": "Maschinelles Intelligenz ist die letzte Erfindung, die die Menschheit jemals machen muss.",
+          "tokenUsage": {
+            "total": 50,
+            "prompt": 23,
+            "completion": 27
+          },
+          "cached": false
+        },
+        "success": false,
+        "score": 0,
+        "latencyMs": 1630,
+        "error": "Output did not contain 'Technologie'",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Output did not contain 'Technologie'",
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Output did not contain 'Technologie'",
+              "assertion": {
+                "type": "javascript",
+                "value": "(output) => {\n                    const pass = out..."
+              }
+            }
+          ],
+          "assertion": null
+        }
+      },
+      {
+        "provider": {
+          "id": "openai:gpt-3.5-turbo"
+        },
+        "prompt": {
+          "raw": "Say Machine intelligence is the last invention that humanity will ever need to make in German",
+          "display": "Say {{ var1 }} in German"
+        },
+        "vars": {
+          "var1": "Machine intelligence is the last invention that humanity will ever need to make",
+          "_conversation": []
+        },
+        "response": {
+          "output": "Maschinelle Intelligenz ist die letzte Erfindung, die die Menschheit jemals machen muss.",
+          "tokenUsage": {
+            "total": 49,
+            "prompt": 23,
+            "completion": 26
+          },
+          "cached": false
+        },
+        "success": false,
+        "score": 0,
+        "latencyMs": 1874,
+        "error": "Output did not contain 'Technologie'",
+        "gradingResult": {
+          "pass": false,
+          "score": 0,
+          "reason": "Output did not contain 'Technologie'",
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0
+          },
+          "componentResults": [
+            {
+              "pass": false,
+              "score": 0,
+              "reason": "Output did not contain 'Technologie'",
+              "assertion": {
+                "type": "javascript",
+                "value": "(output) => {\n                    const pass = out..."
+              }
+            }
+          ],
+          "assertion": null
+        }
+      }
+    ],
+    "stats": {
+      "successes": 2,
+      "failures": 2,
+      "tokenUsage": {
+        "total": 181,
+        "prompt": 88,
+        "completion": 93,
+        "cached": 0
+      }
+    },
+    "table": {
+      "head": {
+        "prompts": [
+          {
+            "raw": "Say {{ var1 }} in German",
+            "display": "Say {{ var1 }} in German",
+            "id": "a1d272b9019781a8f26f6e0d1327a7f5ba5ad7ecd39c9250cd729e643ffc7207",
+            "metrics": {
+              "score": 1,
+              "testPassCount": 1,
+              "testFailCount": 1,
+              "assertPassCount": 0,
+              "assertFailCount": 1,
+              "totalLatencyMs": 2834,
+              "tokenUsage": {
+                "total": 90,
+                "prompt": 44,
+                "completion": 46,
+                "cached": 0
+              }
+            }
+          },
+          {
+            "raw": "Translate {{ var1 }} to German",
+            "display": "Translate {{ var1 }} to German",
+            "id": "1cd406089e8677e8389470a79c592e50290bc68a76c0046f1891b6712e77d1e8",
+            "metrics": {
+              "score": 1,
+              "testPassCount": 1,
+              "testFailCount": 1,
+              "assertPassCount": 0,
+              "assertFailCount": 1,
+              "totalLatencyMs": 2684,
+              "tokenUsage": {
+                "total": 91,
+                "prompt": 44,
+                "completion": 47,
+                "cached": 0
+              }
+            }
+          }
+        ],
+        "vars": [
+          "var1"
+        ]
+      },
+      "body": [
+        {
+          "outputs": [
+            {
+              "pass": true,
+              "score": 1,
+              "text": "Jede hinreichend fortgeschrittene Technologie ist von Magie nicht zu unterscheiden.",
+              "prompt": "Say Any sufficiently advanced technology is indistinguishable from magic. in German",
+              "provider": "openai:gpt-3.5-turbo",
+              "latencyMs": 960,
+              "tokenUsage": {
+                "total": 41,
+                "prompt": 21,
+                "completion": 20
+              },
+              "gradingResult": {
+                "pass": true,
+                "score": 1,
+                "reason": "No assertions",
+                "tokensUsed": {
+                  "total": 0,
+                  "prompt": 0,
+                  "completion": 0
+                },
+                "assertion": null
+              }
+            },
+            {
+              "pass": true,
+              "score": 1,
+              "text": "Jede ausreichend fortgeschrittene Technologie ist von Magie nicht zu unterscheiden.",
+              "prompt": "Translate Any sufficiently advanced technology is indistinguishable from magic. to German",
+              "provider": "openai:gpt-3.5-turbo",
+              "latencyMs": 1054,
+              "tokenUsage": {
+                "total": 41,
+                "prompt": 21,
+                "completion": 20
+              },
+              "gradingResult": {
+                "pass": true,
+                "score": 1,
+                "reason": "No assertions",
+                "tokensUsed": {
+                  "total": 0,
+                  "prompt": 0,
+                  "completion": 0
+                },
+                "assertion": null
+              }
+            }
+          ],
+          "vars": [
+            "Any sufficiently advanced technology is indistinguishable from magic."
+          ]
+        },
+        {
+          "outputs": [
+            {
+              "pass": false,
+              "score": 0,
+              "text": "Output did not contain 'Technologie'\n---\nMaschinelle Intelligenz ist die letzte Erfindung, die die Menschheit jemals machen muss.",
+              "prompt": "Say Machine intelligence is the last invention that humanity will ever need to make in German",
+              "provider": "openai:gpt-3.5-turbo",
+              "latencyMs": 1874,
+              "tokenUsage": {
+                "total": 49,
+                "prompt": 23,
+                "completion": 26
+              },
+              "gradingResult": {
+                "pass": false,
+                "score": 0,
+                "reason": "Output did not contain 'Technologie'",
+                "tokensUsed": {
+                  "total": 0,
+                  "prompt": 0,
+                  "completion": 0
+                },
+                "componentResults": [
+                  {
+                    "pass": false,
+                    "score": 0,
+                    "reason": "Output did not contain 'Technologie'",
+                    "assertion": {
+                      "type": "javascript",
+                      "value": "(output) => {\n                    const pass = out..."
+                    }
+                  }
+                ],
+                "assertion": null
+              }
+            },
+            {
+              "pass": false,
+              "score": 0,
+              "text": "Output did not contain 'Technologie'\n---\nMaschinelles Intelligenz ist die letzte Erfindung, die die Menschheit jemals machen muss.",
+              "prompt": "Translate Machine intelligence is the last invention that humanity will ever need to make to German",
+              "provider": "openai:gpt-3.5-turbo",
+              "latencyMs": 1630,
+              "tokenUsage": {
+                "total": 50,
+                "prompt": 23,
+                "completion": 27
+              },
+              "gradingResult": {
+                "pass": false,
+                "score": 0,
+                "reason": "Output did not contain 'Technologie'",
+                "tokensUsed": {
+                  "total": 0,
+                  "prompt": 0,
+                  "completion": 0
+                },
+                "componentResults": [
+                  {
+                    "pass": false,
+                    "score": 0,
+                    "reason": "Output did not contain 'Technologie'",
+                    "assertion": {
+                      "type": "javascript",
+                      "value": "(output) => {\n                    const pass = out..."
+                    }
+                  }
+                ],
+                "assertion": null
+              }
+            }
+          ],
+          "vars": [
+            "Machine intelligence is the last invention that humanity will ever need to make"
+          ]
+        }
+      ]
+    }
+  },
+  "config": {
+    "providers": "openai:gpt-3.5-turbo",
+    "outputPath": "/Users/michaelheckmann/Development/amay-prompts/experiments/results/smoke.json",
+    "prompts": [
+      "Say {{ var1 }} in German",
+      "Translate {{ var1 }} to German"
+    ],
+    "tests": [
+      {
+        "vars": {
+          "var1": "Any sufficiently advanced technology is indistinguishable from magic."
+        }
+      },
+      {
+        "vars": {
+          "var1": "Machine intelligence is the last invention that humanity will ever need to make"
+        },
+        "assert": [
+          {
+            "type": "javascript"
+          }
+        ]
+      }
+    ]
+  },
+  "shareableUrl": null
+}
