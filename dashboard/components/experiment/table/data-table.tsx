@@ -1,9 +1,7 @@
 "use client"
 
-import React from "react"
 import {
   ColumnDef,
-  Row,
   flexRender,
   getCoreRowModel,
   useReactTable,
@@ -18,6 +16,8 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
+import { useHandleKeyDown } from "./utils/use-handle-key-down"
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
@@ -27,62 +27,12 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-  const tbodyRef = React.useRef<HTMLTableSectionElement>(null)
+  const { tbodyRef, handleKeyDown } = useHandleKeyDown()
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
   })
-
-  const handleKeyDown = (event: React.KeyboardEvent, row: Row<TData>) => {
-    console.log(event, row)
-    event.stopPropagation()
-    const rows = tbodyRef.current?.children
-    if (!rows) return
-
-    const currentRow = event.currentTarget.parentElement
-    if (!currentRow) return
-    const currentRowIndex = Array.from(rows).indexOf(currentRow)
-    const nextRow = rows[currentRowIndex + 1] as HTMLTableRowElement
-    const previousRow = rows[currentRowIndex - 1] as HTMLTableRowElement
-
-    const currentColumn = event.currentTarget
-    if (!currentColumn) return
-    const currentColumnIndex = Array.from(currentRow.children).indexOf(
-      currentColumn
-    )
-    const nextColumn = currentRow.children[
-      currentColumnIndex + 1
-    ] as HTMLTableCellElement
-    const previousColumn = currentRow.children[
-      currentColumnIndex - 1
-    ] as HTMLTableCellElement
-
-    switch (event.key) {
-      case "ArrowUp":
-        if (previousRow) {
-          ;(previousRow.children[currentColumnIndex] as HTMLElement).focus()
-        }
-        break
-      case "ArrowDown":
-        if (nextRow) {
-          ;(nextRow.children[currentColumnIndex] as HTMLElement).focus()
-        }
-        break
-      case "ArrowLeft":
-        if (previousColumn) {
-          ;(previousColumn as HTMLElement).focus()
-        }
-        break
-      case "ArrowRight":
-        if (nextColumn) {
-          ;(nextColumn as HTMLElement).focus()
-        }
-        break
-      default:
-        break
-    }
-  }
 
   return (
     <div className="border rounded-md">
