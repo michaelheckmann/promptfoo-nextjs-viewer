@@ -1,4 +1,3 @@
-/* eslint-disable tailwindcss/classnames-order */
 import Link from "next/link"
 
 import { siteConfig } from "@/config/site"
@@ -27,21 +26,6 @@ export function SiteHeader() {
               >
                 <Icons.gitHub className="w-5 h-5" />
                 <span className="sr-only">GitHub</span>
-              </div>
-            </Link>
-            <Link
-              href={siteConfig.links.notion}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <div
-                className={buttonVariants({
-                  size: "icon",
-                  variant: "ghost",
-                })}
-              >
-                <Icons.notion className="relative top-[1px] h-5 w-5 fill-current" />
-                <span className="sr-only">Notion</span>
               </div>
             </Link>
           </nav>
