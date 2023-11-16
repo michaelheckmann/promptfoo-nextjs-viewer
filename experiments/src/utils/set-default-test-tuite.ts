@@ -14,7 +14,7 @@ type NoPathString<T extends string> = string extends T
   : T;
 
 // We're only supporting one level of nesting for now
-type Name<T extends string> =
+export type Name<T extends string> =
   | NoPathString<T>
   | `${NoPathString<T>}/${NoPathString<T>}`;
 
@@ -23,6 +23,6 @@ export const setDefaultTestSuite = <S extends string>(
 ): DefaultTestSuite => {
   return {
     providers: "openai:gpt-3.5-turbo",
-    outputPath: getOutPath(name),
+    outputPath: getOutPath(process.env.EXPERIMENT_NAME ?? name),
   };
 };

@@ -3,12 +3,17 @@ import dotenv from "dotenv";
 import path from "path";
 import { smoke } from "./smoke";
 import { getProjectPath } from "./utils/get-project-path";
+import { handleExperimentName } from "./utils/handle-experiment-name";
 
 const EXPERIMENT_MAP: Record<string, Function> = {
   smoke,
 };
 
-const main = async (experiment: string) => {
+const main = async (experiment: string, experimentName?: string) => {
+  if (experimentName) {
+    await handleExperimentName(experimentName);
+  }
+
   const experimentFn = EXPERIMENT_MAP[experiment];
   if (!experimentFn) {
     console.error(`Experiment ${experiment} not found.`);
@@ -23,6 +28,7 @@ dotenv.populate(process.env as any, {
 dotenv.config();
 
 const experiment = process.argv[2];
+const experimentName = process.argv[3];
 
 if (!experiment) {
   console.error("Please provide an experiment name as an argument.");
@@ -34,4 +40,4 @@ if (!process.env.OPENAI_API_KEY) {
   process.exit(1);
 }
 
-main(experiment);
+main(experiment, experimentName);
