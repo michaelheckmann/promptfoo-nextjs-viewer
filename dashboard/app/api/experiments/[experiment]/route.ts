@@ -1,44 +1,26 @@
 import { readFileSync } from "fs"
-import path from "path"
-import { NextResponse } from "next/server"
 
-import { getProjectPath } from "@/lib/getProjectPath"
+import { getExperimentPath } from "@/lib/get-experiment-path"
+import { getManualScores } from "@/lib/get-manual-scores"
+import { sendResponse } from "@/lib/send-response"
 
-export async function GET(
-  request: Request,
-  { params }: { params: { experiment: string } }
-) {
+type Params = {
+  experiment: string
+}
+
+export async function GET(request: Request, { params }: { params: Params }) {
   try {
-    const experimentPath = path.join(
-      getProjectPath(),
-      "..",
-      "experiments",
-      "results",
-      `${params.experiment}.json`
-    )
+    const experimentPath = getExperimentPath(params.experiment)
     const experiment = readFileSync(experimentPath, "utf-8")
+    const manualScores = getManualScores(params.experiment)
     if (!experiment) {
-      return NextResponse.json(
-        { error: "Experiment not found" },
-        {
-          status: 404,
-        }
-      )
+      return sendResponse(404, "Experiment not found")
     }
-    return NextResponse.json(
-      {
-        data: JSON.parse(experiment),
-      },
-      {
-        status: 200,
-      }
-    )
+    return sendResponse(200, {
+      experiment: JSON.parse(experiment),
+      manualScores,
+    })
   } catch (error) {
-    return NextResponse.json(
-      { error },
-      {
-        status: 500,
-      }
-    )
+    return sendResponse(500, error)
   }
 }

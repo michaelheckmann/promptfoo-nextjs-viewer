@@ -2,6 +2,7 @@ import "@/styles/globals.css"
 import { Metadata } from "next"
 
 import { siteConfig } from "@/config/site"
+import { ExperimentProvider } from "@/lib/experiment-context"
 import { fontMono, fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
 import { SiteHeader } from "@/components/site-header"
@@ -40,10 +41,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
             fontMono.variable
           )}
         >
-          <div className="relative flex flex-col min-h-screen pb-28">
-            <SiteHeader />
-            <div className="flex-1">{children}</div>
-          </div>
+          <ExperimentProvider>
+            <div className="relative flex flex-col min-h-screen pb-28">
+              <SiteHeader />
+              <div className="flex-1">{children}</div>
+            </div>
+          </ExperimentProvider>
           <TailwindIndicator />
         </body>
       </html>

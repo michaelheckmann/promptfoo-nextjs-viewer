@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 
 import path from "path";
 import { smoke } from "./smoke";
-import { getProjectPath } from "./utils/getProjectPath";
+import { getProjectPath } from "./utils/get-project-path";
 
 const EXPERIMENT_MAP: Record<string, Function> = {
   smoke,

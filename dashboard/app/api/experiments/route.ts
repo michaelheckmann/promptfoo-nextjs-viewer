@@ -1,8 +1,8 @@
-import { readdirSync } from "fs"
+import { lstatSync, readdirSync } from "fs"
 import path from "path"
-import { NextResponse } from "next/server"
 
-import { getProjectPath } from "@/lib/getProjectPath"
+import { getProjectPath } from "@/lib/get-project-path"
+import { sendResponse } from "@/lib/send-response"
 
 export async function GET() {
   try {
@@ -12,23 +12,29 @@ export async function GET() {
       "experiments",
       "results"
     )
-    const experiments = readdirSync(experimentsFolder).map((experiment) =>
-      experiment.replace(".json", "")
-    )
-    return NextResponse.json(
-      {
-        data: experiments,
-      },
-      {
-        status: 200,
-      }
-    )
+    const experiments = readdirSync(experimentsFolder)
+      .map((experiment) => {
+        // Check if it's a directory and if it is, read its contents
+        const experimentPath = path.join(experimentsFolder, experiment)
+        const isScored = experiment.includes("scored")
+        const isDirectory = lstatSync(experimentPath).isDirectory()
+        if (isScored) {
+          return null
+        }
+        if (isDirectory) {
+          return readdirSync(experimentPath).map((file) =>
+            path.join(experiment, file)
+          )
+        } else {
+          return experiment
+        }
+      })
+      .filter(Boolean)
+      .flat()
+      .map((e) => (e as string).replace(".json", ""))
+
+    return sendResponse(200, experiments)
   } catch (error) {
-    return NextResponse.json(
-      { error },
-      {
-        status: 500,
-      }
-    )
+    return sendResponse(500, error)
   }
 }

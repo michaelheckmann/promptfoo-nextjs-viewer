@@ -1,9 +1,10 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { EvaluateTable, EvaluateTableOutput } from "promptfoo"
+import { EvaluateTable } from "promptfoo"
 
-import { makeGetCall } from "@/lib/makeGetCall"
+import { EvaluateTableOutputWithManualGrading } from "@/types/experiment"
+import { makeGetRequest } from "@/lib/make-get-request"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
@@ -23,7 +24,7 @@ type Props = {
 }
 const ScoreButton = ({ type, pass }: Props) => {
   const handleClick = async () => {
-    makeGetCall(`/api/evaluate/${type}`)
+    makeGetRequest(`/api/evaluate/${type}`)
   }
   return (
     <button
@@ -61,19 +62,69 @@ const ScoreButton = ({ type, pass }: Props) => {
   )
 }
 
+const countPasses = (tableOutput: EvaluateTableOutputWithManualGrading) => {
+  const automated = tableOutput.gradingResult?.pass ? 1 : 0
+  const manual =
+    tableOutput.manualGradings?.reduce(
+      (acc, curr) => acc + (curr.pass ? 1 : 0),
+      0
+    ) ?? 0
+  return automated + manual
+}
+
+const countFailures = (tableOutput: EvaluateTableOutputWithManualGrading) => {
+  const automated = tableOutput.gradingResult?.pass ? 0 : 1
+  const manual =
+    tableOutput.manualGradings?.reduce(
+      (acc, curr) => acc + (curr.pass ? 0 : 1),
+      0
+    ) ?? 0
+  return automated + manual
+}
+
 export const getPromptsColumns = (
   prompts: EvaluateTable["head"]["prompts"]
 ) => {
   return prompts.map((p) => ({
     header: p.raw,
     accessorKey: p.id,
-    cell: ({ getValue }: { getValue: () => EvaluateTableOutput }) => {
+    cell: ({
+      getValue,
+    }: {
+      getValue: () => EvaluateTableOutputWithManualGrading
+    }) => {
+      const passes = countPasses(getValue())
+      const failures = countFailures(getValue())
       return (
         <div>
           <div>{getValue().text}</div>
           <div className="flex justify-end gap-3">
-            <ScoreButton type="thumbsUp" pass={getValue().pass} />
-            <ScoreButton type="thumbsDown" pass={getValue().pass} />
+            <div
+              className={cn("flex gap-0.5", {
+                "stroke-green-500 text-green-500": passes,
+                "text-gray-300": !passes,
+              })}
+            >
+              {passes}
+              <Icons.thumbsUp
+                className={cn("stroke-gray-300", {
+                  "stroke-green-500": passes,
+                })}
+              />
+            </div>
+            <div
+              className={cn("flex gap-0.5 ", {
+                "stroke-red-500 text-red-500": failures,
+                "text-gray-300": !failures,
+              })}
+            >
+              {failures}
+              <Icons.thumbsDown
+                className={cn("stroke-gray-300", {
+                  "stroke-red-500": failures,
+                })}
+              />
+            </div>
           </div>
         </div>
       )

@@ -1,24 +1,12 @@
-import { NextResponse } from "next/server"
+import { sendResponse } from "@/lib/send-response"
 
 export async function GET(
   request: Request,
   { params }: { params: { experiment: string } }
 ) {
   try {
-    return NextResponse.json(
-      {
-        data: "hello",
-      },
-      {
-        status: 200,
-      }
-    )
+    return sendResponse(200, "hello")
   } catch (error) {
-    return NextResponse.json(
-      { error },
-      {
-        status: 500,
-      }
-    )
+    return sendResponse(500, error)
   }
 }

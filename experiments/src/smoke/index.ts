@@ -1,6 +1,6 @@
 import { evaluate } from "promptfoo";
-import { setDefaultOptions } from "../utils/setDefaultOptions";
-import { setDefaultTestSuite } from "./../utils/setDefaultTestSuite";
+import { setDefaultOptions } from "../utils/set-default-options";
+import { setDefaultTestSuite } from "../utils/set-default-test-tuite";
 import { prompts } from "./prompts";
 import { tests } from "./tests";
 

@@ -1,26 +1,18 @@
 {
-  "results": {
-    "results": [
-      {
-        "provider": {
-          "id": "openai:gpt-3.5-turbo"
-        },
-        "prompt": {
-          "raw": "Say Any sufficiently advanced technology is indistinguishable from magic. in German",
-          "display": "Say {{ var1 }} in German"
-        },
-        "vars": {
-          "var1": "Any sufficiently advanced technology is indistinguishable from magic."
-        },
-        "response": {
-          "output": "Jede hinreichend fortgeschrittene Technologie ist von Magie nicht zu unterscheiden."
-        },
-        "manualGrading": {
-          "pass": true,
-          "score": 1,
-          "reason": ""
-        }
+  "data": [
+    {
+      "text": "Jede hinreichend fortgeschrittene Technologie ist von Magie nicht zu unterscheiden.",
+      "prompt": "Say Any sufficiently advanced technology is indistinguishable from magic. in German",
+      "provider": "openai:gpt-3.5-turbo",
+      "vars": [
+        "Any sufficiently advanced technology is indistinguishable from magic."
+      ],
+      "manualGrading": {
+        "user": "michael",
+        "pass": false,
+        "score": 1,
+        "reason": ""
       }
-    ]
-  }
+    }
+  ]
 }

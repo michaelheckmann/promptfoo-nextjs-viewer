@@ -1,7 +1,23 @@
 import { EvaluateTable } from "promptfoo"
 
-import { getColumns, getPromptsColumns, getVarsColumns } from "./table/columns"
-import { DataTable } from "./table/data-table"
+import {
+  getColumns,
+  getPromptsColumns,
+  getVarsColumns,
+} from "./data-table/columns"
+import { DataTable } from "./data-table/data-table"
+
+export const Table = (results: EvaluateTable) => {
+  const columns = getColumns(results.head)
+  const data = getData(results)
+
+  return (
+    <div>
+      <h2 className="mb-4 text-2xl font-semibold">Results</h2>
+      <DataTable columns={columns} data={data} />
+    </div>
+  )
+}
 
 const getData = (table: EvaluateTable) => {
   const { head, body } = table
@@ -21,16 +37,4 @@ const getData = (table: EvaluateTable) => {
     })
     return out
   })
-}
-
-export const Table = (results: EvaluateTable) => {
-  const columns = getColumns(results.head)
-  const data = getData(results)
-
-  return (
-    <div>
-      <h2 className="mb-4 text-2xl font-semibold">Results</h2>
-      <DataTable columns={columns} data={data} />
-    </div>
-  )
 }
